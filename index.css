@@ -76,7 +76,6 @@ selector {
 }
 .update {
     position: relative;
-    background: solid rgba(51, 51, 51);
     justify-content: top;
     align-items: center;
     text-align: center;
