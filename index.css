@@ -63,6 +63,31 @@ selector {
     text-color: white;
     background-attachment: fixed;
 }
+p.mid {
+  overflow: hidden;
+  text-align: center;
+}
+
+p.mid::before,
+p.mid::after {
+  background-color: gray;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 25%;
+}
+
+p.mid::before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+p.mid::after {
+  left: 0.5em;
+  margin-right: -50%;
+}
 .goback {
     overflow: hidden;
     top: 0;
@@ -75,12 +100,12 @@ selector {
     text-color: white;
 }
 .update {
-    position: relative;
-    justify-content: center;
+    vertical-align: middle;
     align-items: center;
     text-align: center;
     border-radius: 90px;
     background-color: rgba(51, 51, 51);
+    position: relative;
 }
 i {
   font-size: 25px;
