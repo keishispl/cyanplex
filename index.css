@@ -1,5 +1,6 @@
-@import "https://fonts.googleapis.com/css2?family=Pixelify+Sans&family=Raleway:wght@300&display=swap";html {
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&family=Exo+2&family=Noto+Sans+JP:wght@500&family=Pixelify+Sans&family=Playpen+Sans&family=Raleway:wght@300&family=Teko&display=swap'); html {
     font-family: 'Pixelify Sans', sans-serif;
+    font-family: 'Comfortaa', Exo 2;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%
 }
@@ -63,6 +64,41 @@ selector {
     text-color: white;
     background-attachment: fixed;
 }
+.left {
+    margin: 0
+    position: absolute;
+    justify-content: top;
+    align-items: left;
+    text-align: center;
+    background: linear-gradient(180deg, #03001c, #000000);
+    text-color: white;
+    background-attachment: fixed;
+    margin-up: 10px;
+    font-family: Comfortaa;
+}
+::selection {
+    color: white;
+    background: rgba(4, 71, 13, 0.75);
+}
+::-moz-selection {
+    color: white;
+    background: rgba(4, 71, 13, 0.75);
+}
+
+.articles {
+    position: relative;
+    background: transparent;
+    justify-content: top;
+    align-items: center;
+    text-align: center;
+    border: 2px solid rgba(6, 1, 61, 0.5);
+    border-radius: 10px;
+    background-color: rgba(6, 1, 61, 0.1);
+    vertical-align: middle;
+    width: 25%;
+    left: 37.5%;
+    right: 37.5%;
+}
 p.mid {
   overflow: hidden;
   text-align: center;
@@ -86,6 +122,41 @@ p.mid::before {
 
 p.mid::after {
   left: 0.5em;
+  margin-right: -50%;
+}
+p.mid2 {
+  overflow: hidden;
+  text-align: center;
+}
+
+p.mid2::before,
+p.mid2::after {
+  background-color: white;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 30%;
+}
+img.circle {
+    border-radius: 50%;
+    height: 55px;
+    float: left;
+    margin-left: 46%;
+}
+.right {
+    margin-right: 50%;
+    margin-top: 0%;
+    text-align: left;
+    margin-left: 50%
+}
+
+p.mid2::before {
+  margin-left: -50%;
+}
+
+p.mid2::after {
   margin-right: -50%;
 }
 .goback {
