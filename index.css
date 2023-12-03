@@ -99,6 +99,20 @@ selector {
     left: 37.5%;
     right: 37.5%;
 }
+.code {
+    position: relative;
+    background: transparent;
+    justify-content: top;
+    align-items: center;
+    text-align: left;
+    border: 2px solid rgba(6, 1, 61, 0.5);
+    border-radius: 10px;
+    background-color: transparent;
+    vertical-align: middle;
+    left: 25%;
+    right: 25%;
+    width: 50%;
+}
 p.mid {
   overflow: hidden;
   text-align: center;

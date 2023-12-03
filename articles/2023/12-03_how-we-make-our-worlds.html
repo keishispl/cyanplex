@@ -1,0 +1,108 @@
+<html><head>
+    <title>How we make our worlds - CyanPlex Reimagined</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    <meta name="theme-color" content="#00a69b">
+    <meta content="../../img/cyan.png" property="og:image">
+    <link rel="icon" href="../../img/cyan.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/cyan.png">
+    <link rel="manifest" href="https://www.bulzyland.xyz/assets/icons/site.webmanifest">
+    <meta content="How we make our worlds - CyanPlex Reinmagined" property="og:title">
+    <meta content="A Minecraft SkyMine server with inspirations such as Hypixel Skyblock, and this is a remake of the original CyanMines SkyMine." property="og:description">
+    <meta name="revisit-after" content="2 days">
+    <meta property="og:locale" content="en_US">
+    <link rel="canonical" href="https://kouciana.github.io/">
+    <meta property="og:url" content="https://koucina.github.io/">
+    <meta property="og:site_name" content="Dev Blog 2023/12/03 - CyanPlex / CyanMines">
+
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" type="text/css" rel="stylesheet">
+    <link href="../../index.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="left">
+<div class="goback">
+    <h2><a href="../#2023" style="text-decoration: none; color: white; font-family: 'Pixelify Sans', Sans Serif;">Go Back</a></h2>
+</div>
+    <br><br><br>
+    <p style="color: gray;">developer blog</p>
+    <h2 style="color: white; font-size: 2.5rem; margin-top: 0px; margin-bottom: 0px">How we make our worlds</h2>
+    <p style="color: gray;">December 3, 2023</p>
+    <h3 style="color: rgba(200, 200, 200)">Hey! Yes, another article. But about coding side of things.</h3>
+    <img class="circle" src="../../img/people/kacey.png">
+    <div class="right">
+        <p style="color: gray; margin-top: 0px; margin-bottom: 0px">author</p>
+        <h2 style="color: white; margin-top: 0px; margin-bottom: 0px">Kacey__</h2>
+    </div>
+    <br>
+    <p style="color: white;" class="mid2"></p>
+    <br>
+    <h2 style="color: white;">A base introduction</h2>
+    <h3 style="color: rgba(200, 200, 200)">Alright. We don't want to make you confused as we go along the code, so we'll go step by step instead of cramping everything here at once.<br>Here's the whole code for reference if you can read it:</h3>
+    <div class="code"><pre>
+command clone &lt;world&gt;:
+    permission: op
+    trigger:
+        send "&3&lMAINTENENCE &8» &fMaintenence is starting in world &6%arg-1% &fin &620 seconds&f." to all players
+        wait 15 seconds
+        send "&3&lMAINTENENCE &8» &fMaintenence is starting in world &6%arg-1% &fin &65 seconds&f." to all players
+        wait 5 seconds
+        player command "citizens save"
+        set {maintenence::%arg-1%} to true
+        send "&3&lMAINTENENCE &8» &fMaintenence is starting in world &6%arg-1%&f..." to all players
+        teleport all players in world "%arg-1%" to spawn of world "maintenence"
+        player command "mv delete %arg-1%"
+        player command "mv confirm"
+        player command "mv clone %arg-1%build %arg-1%"
+        wait 5 seconds
+        teleport all players in world "maintenence" to spawn of world "%arg-1%"
+        player command "citizens reload"
+        player command "citizens reload"
+        player command "holo reload"
+        delete {maintenence::%arg-1%}
+        send "&3&lMAINTENENCE &8» &fMaintenence in world &6%arg-1% &fis &acompleted&f." to all players
+    </pre></div>
+    <h2 style="color: white;">Part 1: Command</h2>
+    <h3 style="color: rgba(200, 200, 200)">Mhm.. Our worlds are made from cloning from other worlds that we've already finished building in.<br>Anyways, the code below is a command, named <code>clone</code>, which will require a variable when using the command: a world name.<br>And needing to be a operator to use the command too! The trigger is for what happens when using the command.</h3>
+    <div class="code"><pre>
+command clone &lt;world&gt;:
+    permission: op
+    trigger:</pre></div>
+    <h2 style="color: white;">Part 2: Preparing</h2>
+    <h3 style="color: rgba(200, 200, 200)">When we clone a world, we would want to teleport players to another world before cloning, right?<br>Of course, we can't just teleport them instantly cuz that might freak them out and they might lose progress from this,<br>so we will create a warning message before it actually happens.</h3>
+    <div class="code"><pre>
+send "&3&lMAINTENENCE &8» &fMaintenence is starting in world &6%arg-1% &fin &620 seconds&f." to all players
+wait 15 seconds
+send "&3&lMAINTENENCE &8» &fMaintenence is starting in world &6%arg-1% &fin &65 seconds&f." to all players
+wait 5 seconds
+player command "citizens save"
+set {maintenence::%arg-1%} to true
+send "&3&lMAINTENENCE &8» &fMaintenence is starting in world &6%arg-1%&f..." to all players
+teleport all players in world "%arg-1%" to spawn of world "maintenence"</pre></div>
+    <h3 style="color: rgba(200, 200, 200)">Oh yes, we will create a warning time of 20 seconds, when the time is up, we'd make the admin do "citizens save" which will save the shops data.<br>Then we will set the cloning variable to true, as, we are cloning that world. And we will teleport the players to a dimension.</h3>
+    <h2 style="color: white;">Part 3: Cloning</h2>
+    <h3 style="color: rgba(200, 200, 200)">OK, we are now actually cloning the worlds now.<br>First off, we will delete the world first because it cnnnot clone a world into the same name. Then, we would actually clone the world.</h3>
+    <div class="code"><pre>
+player command "mv delete %arg-1%"
+player command "mv confirm"
+player command "mv clone %arg-1%build %arg-1%"
+wait 5 seconds</pre></div>
+    <h3 style="color: rgba(200, 200, 200)">Oh yes, we would also wait 5 seconds as cloning might take some time.</h3>
+    <h2 style="color: white">Part 4: Aftermath</h2>
+    <h3 style="color: rgba(200, 200, 200)">OK so we will now do the stuff to restore the shops and holograms.<br>First, we will teleport the players back.</h3>
+    <div class="code"><pre>
+teleport all players in world "maintenence" to spawn of world "%arg-1%"
+player command "citizens reload"
+player command "citizens reload"
+player command "holo reload"
+delete {maintenence::%arg-1%}
+send "&3&lMAINTENENCE &8» &fMaintenence in world &6%arg-1% &fis &acompleted&f." to all players</pre></div>
+    <h3 style="color: rgba(200, 200, 200)">After that, we will reload the shops and holograms, then delete the variable as we finished the cloning.<br>At last, we will send a little message saying that cloning the world is now over.</h3>
+    <h2 style="color: white">Why is this Skript important to us?</h2>
+    <h3 style="color: rgba(200, 200, 200)">Well, because I hate to manually do things, and well, this is useful in cloning an new area of the dimension into an existing dimension.<br>Because we wouldn't want to build right where people can already see them, as it would just remove the element of suprise of what it actually looks like.<br>(And we don't want them to break our builds yet, or annoying us.)<br><br>Oh yeah, we use a coding language called <a href="https://github.com/SkriptLang/Skript">Skript</a>, which is easy to learn. You can try it too if you want.<br>Anyways, see you in the next Developer blog!</h3>
+    <br><br><br><br><br><br>
+    <p><a target="_blank" href="https://twitter.com/kou_spl3"><i style="color: white;" class="fab fa-twitter"></i></a> <a target="_blank" href="https://discord.gg/Qf66z3FQvK"><i style="color: white;" class="fab fa-discord"></i></a></p>
+</div>
+</body>
+</html>
